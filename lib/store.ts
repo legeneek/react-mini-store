@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-export function createStore(target: any) {
+export function createStore(target: any = {}) {
   const depMap: any = new Map();
 
   function setter(key: any, val: any) {
-    const pre = target[key]
+    const pre = target[key];
     if (pre === val) {
       // no need to set
     } else {
@@ -31,21 +31,21 @@ export function createStore(target: any) {
       if (!depMap[key]) {
         depMap[key] = new Set();
       }
-  
+
       if (!depMap[key].has(setData)) {
         depMap[key].add(setData);
       }
-      return data
+      return data;
     },
-    set: (key:any) => {
+    set: (key: any) => {
       return (val: any) => {
-        if (typeof val == 'function') {
-          const v = val(target[key])
-          setter(key, v)
+        if (typeof val == "function") {
+          const v = val(target[key]);
+          setter(key, v);
         } else {
-          setter(key, val)
+          setter(key, val);
         }
-      }
+      };
     },
   };
 }

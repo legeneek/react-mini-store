@@ -3,7 +3,7 @@
 import { createStore } from "@/lib/store";
 import { useState } from "react";
 
-const useStore: any = createStore({ count: 1, name: "x" });
+const store: any = createStore({ count: 1, name: "x" });
 
 export default function Home() {
   const [show, setShow] = useState(true);
@@ -33,19 +33,19 @@ export default function Home() {
 
 function CompA() {
   console.log("render count");
-  const count = useStore.get("count");
+  const count = store.get("count");
   return <div>{count}</div>;
 }
 
 function CompB() {
   console.log("render name");
-  const name = useStore.get("name");
+  const name = store.get("name");
   return <div>{name}</div>;
 }
 
 function CompC() {
   console.log("render button");
-  const setCount = useStore.set("count");
+  const setCount = store.set("count");
   return (
     <button
       className="border p-2 rounded-md"
@@ -58,7 +58,7 @@ function CompC() {
 
 function CompD() {
   console.log("render input");
-  const setName = useStore.set("name");
+  const setName = store.set("name");
   return (
     <input className="border" onInput={(e: any) => setName(e.target.value)} />
   );
